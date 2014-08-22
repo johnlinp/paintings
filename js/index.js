@@ -3,36 +3,51 @@
         str = str.replace(/-/g, ' ');
         str = str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
         return str;
-    }
-    var loadPicture = function () {
+    };
+
+    var getPictures = function() {
         var allNames = [
+            'thick-bricks',
             'jumping-wolf',
             'candy-machine',
-            'for-rent',
             'muses-sculpture',
             'river-side',
             'professional-diving',
             'purple-tree',
             'quebec-congress',
-            'thick-bricks',
             'laval-cafe',
             'three-mouses',
             'waterfall-top',
             'window-plants',
+            'for-rent',
         ];
         var hash = window.location.hash;
-        var targetName, targetIdx = -1;
+        var pictures = {};
+        var curIdx = -1;
         if(hash) {
-            targetName = hash.substring(1);
-            targetIdx = allNames.indexOf(targetName);
+            pictures.curName = hash.substring(1);
+            curIdx = allNames.indexOf(pictures.curName);
         }
-        if(targetIdx == -1) {
-            targetName = allNames[0];
-            targetIdx = 0;
+        if(curIdx == -1) {
+            pictures.curName = allNames[0];
+            curIdx = 0;
         }
-        $('#picture-first').attr('src', 'images/water-paint/' + targetName + '/drawing.jpg');
-        $('#picture-second').attr('src', 'images/water-paint/' + targetName + '/photo.jpg');
-        $('#picture-title').html(toTitleCase(targetName));
+        var prevIdx = (curIdx + allNames.length - 1) % allNames.length;
+        var nextIdx = (curIdx + 1) % allNames.length;
+        pictures.prevName = allNames[prevIdx];
+        pictures.nextName = allNames[nextIdx];
+        return pictures;
+    };
+
+    var loadCurPicture = function(name) {
+        $('#picture-first').attr('src', 'images/water-paint/' + name + '/drawing.jpg');
+        $('#picture-second').attr('src', 'images/water-paint/' + name + '/photo.jpg');
+        $('#picture-title').html(toTitleCase(name));
+    };
+
+    var setPrevNextPicture = function(prevName, nextName) {
+        $('#prev').attr('href', '#' + prevName);
+        $('#next').attr('href', '#' + nextName);
     };
 
     var putPictureHover = function() {
@@ -41,6 +56,15 @@
         });
     };
 
-    loadPicture();
+    var refreshPictures = function() {
+        var pictures = getPictures();
+        loadCurPicture(pictures.curName);
+        setPrevNextPicture(pictures.prevName, pictures.nextName);
+    };
+
     putPictureHover();
+    refreshPictures();
+    $(window).on('hashchange', function() {
+        refreshPictures();
+    });
 })();
