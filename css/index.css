@@ -16,7 +16,7 @@ body {
     text-align: center;
 }
 
-.picture-block {
+#picture-block {
     display: inline-block;
     background: White;
     padding-top: 30px;
@@ -25,10 +25,24 @@ body {
     border-radius: 6px;
 }
 
-.picture-image {
+#picture-place {
+    display: inline-block;
+    position: relative;
+}
+
+#picture-first, #picture-second {
     max-width: 700px;
     max-height: 550px;
     border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#picture-second {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
 }
 
 #prev, #next {
