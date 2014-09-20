@@ -47,9 +47,8 @@
 
         $('#picture-first').load(function() {
             $('#loading').fadeOut();
+            $('#picture-title').html(toTitleCase(name));
         });
-
-        $('#picture-title').html(toTitleCase(name));
     };
 
     var setPrevNextPicture = function(prevName, nextName) {
