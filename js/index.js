@@ -40,8 +40,15 @@
     };
 
     var loadCurPicture = function(name) {
+        $('#loading').fadeIn();
+
         $('#picture-first').attr('src', 'images/water-paint/' + name + '/drawing.jpg');
         $('#picture-second').attr('src', 'images/water-paint/' + name + '/photo.jpg');
+
+        $('#picture-first').load(function() {
+            $('#loading').fadeOut();
+        });
+
         $('#picture-title').html(toTitleCase(name));
     };
 
