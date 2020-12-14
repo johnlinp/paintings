@@ -21,8 +21,10 @@ body {
     background: White;
     padding-top: 30px;
     padding-bottom: 10px;
-    width: 760px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 6px;
+    min-width: 50%;
 }
 
 #picture-place {
