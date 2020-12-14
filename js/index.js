@@ -54,10 +54,16 @@
     var setPrevNextPicture = function(prevName, nextName) {
         $('#prev').attr('href', '#' + prevName);
         $('#next').attr('href', '#' + nextName);
+        $('#prev').click(function() {
+            $('#picture-second').fadeOut();
+        });
+        $('#next').click(function() {
+            $('#picture-second').fadeOut();
+        });
     };
 
-    var putPictureHover = function() {
-        $('#picture-place').hover(function() {
+    var putPictureClick = function() {
+        $('#picture-place').click(function() {
             $('#picture-second').fadeToggle();
         });
     };
@@ -68,7 +74,7 @@
         setPrevNextPicture(pictures.prevName, pictures.nextName);
     };
 
-    putPictureHover();
+    putPictureClick();
     refreshPictures();
     $(window).on('hashchange', function() {
         refreshPictures();
